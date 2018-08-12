@@ -1,0 +1,100 @@
+,Ward,Monitor,Longitude,Latitude,NO2,PM10,DUST
+Eastbrook,Eastbrook,BG1,0.177891,51.563752,24,,
+Thames,Thames,BG2,0.132857,51.529389,26,19,20
+Bloomsbury,Bloomsbury,BL0,-0.125848,51.522287,39,19,
+Thamesmead East,Thamesmead East,BQ8,0.137279111232178,51.4946486813055,,16,
+Stonebridge,Stonebridge,BT4,-0.258089,51.552476,73,33,38
+Dudden Hill,Dudden Hill,BT5,-0.248774,51.552656,38,26,34
+Harlesden,Harlesden,BT6,-0.247793,51.537799,38,20,21
+Queens Park,Queens Park,BT8,-0.217718908639377,51.5324054617809,39,21,23
+Belvedere,Belvedere,BX2,0.158914493927518,51.4906102082147,23,16,20
+Slade Green & Northend,Slade Green & Northend,BX9,0.184877126994369,51.4659832746662,,,
+Swiss Cottage,Swiss Cottage,CD1,-0.175284,51.544219,49,22,
+King's Cross,King's Cross,CD9,-0.129053205282516,51.5277066194645,88,22,
+Pitsea South East,Pitsea South East,CP2,0.60606,51.554064,24,,
+Norbury & Pollards Hill,Norbury & Pollards Hill,CR8,-0.127523,51.410039,,,
+Waddon,Waddon,CR7,-0.117604507351392,51.3622305655403,31,,
+Fairfield,Fairfield,WA2,-0.191074,51.456962,37,,
+Farringdon Within,Farringdon Within,CT2,-0.104515626337876,51.5145253362314,,,
+Aldgate,Aldgate,CT3,-0.077765681752,51.513847178423,32,22,22
+Aldersgate,Aldersgate,CT4,-0.0961060474176381,51.520225273171,74,26,30
+Vintry,Vintry,CT6,-0.091634,51.510499,98,,
+Bridge,Bridge,CT8,-0.0873571979556188,51.5095436853913,,34,39
+Hanger Hill,Hanger Hill,EA6,-0.292488,51.53085,59,26,30
+Acton Central,Acton Central,EI8,-0.265652052386222,51.5189160348806,,28,31
+East Acton,East Acton,EI1,-0.265502631799754,51.5236078191481,47,30,34
+Askew,Askew,EI3,-0.254668101620372,51.5038527919816,29,21,
+Southbury,Southbury,EN1,-0.0661800662229116,51.6450367266602,25,,
+Edmonton Green,Edmonton Green,EN4,-0.0507658363689,51.614864007,32,,
+Bowes,Bowes,EN5,-0.125338,51.613865,42,19,
+Enfield Highway,Enfield Highway,EN7,-0.02200720557,51.66864334727,23,,
+Blackfen & Lamorbey,Blackfen & Lamorbey,GB6,0.085606,51.4563,40,23,24
+Glyndon,Glyndon,GN0,0.074003,51.490532,36,20,
+Plumstead,Plumstead,GN3,0.095111,51.486957,31,20,
+Coldharbour and New Eltham,Coldharbour and New Eltham,GN4,0.0642224671704697,51.4346627060562,42,29,
+Peninsula,Peninsula,GR8,0.017901,51.486884,55,26,28
+Grove Park,Grove Park,GR4,0.070766,51.45258,17,17,
+Greenwich West,Greenwich West,GR7,-0.012381,51.472504,38,24,
+Eltham West,Eltham West,GR9,0.040725,51.456357,40,21,
+Northumberland Park,Northumberland Park,HG1,-0.068218,51.599302,39,,
+Muswell Hill,Muswell Hill,HG4,-0.125400278484885,51.5839769007709,21,,
+Heathrow Villages,Heathrow Villages,HI0,-0.460826,51.496309,48,,
+Hoxton West,Hoxton West,HK6,-0.08491,51.526454,48,23,25
+Kenton East,Kenton East,HR1,-0.298775,51.617327,12,19,20
+Headstone North,Headstone North,HR2,-0.362989,51.588417,38,21,21
+Rainham and Wennington,Rainham and Wennington,HV1,0.205460705694044,51.520787459334,28,19,
+Brooklands,Brooklands,HV3,0.179079,51.572976,38,21,
+Holborn and Covent Garden,Holborn and Covent Garden,IM1,-0.1201947113171,51.5173675146177,70,,
+Holloway,Holloway,IS2,-0.116146,51.555378,47,21,23
+Highbury West,Highbury West,IS6,-0.106989,51.557895,24,21,22
+St. Helen's,St. Helen's,KF1,-0.213492139585065,51.5210467476039,,15,
+Tolworth and Hook Rise,Tolworth and Hook Rise,KT4,-0.281259,51.379312,44,25,25
+Grove,Grove,KT5,-0.29658478,51.412308,56,35,35
+Coombe Hill,Coombe Hill,KT6,-0.257029893767993,51.4355006647773,36,24,24
+Ferndale,Ferndale,LB4,-0.11458102695123,51.464113541162,99,31,33
+Oval,Oval,LB5,-0.124545234819213,51.4854867739729,54,32,33
+St Leonard's,St Leonard's,LB6,-0.13186863879576,51.4282131429499,34,23,24
+Heathrow Villages,Heathrow Villages,LH0,-0.441627,51.48878,,7,
+Rushey Green,Rushey Green,LW1,-0.020266,51.445468,37,,
+Brockley,Brockley,LW2,-0.039641,51.474954,46,23,
+Lewisham Central,Lewisham Central,LW4,-0.0160682432041528,51.4646910611736,49,20,20
+Abbey,Abbey,ME2,-0.192230805042824,51.4161384794862,,41,41
+Merton Park,Merton Park,ME9,-0.19589212,51.40162,49,,
+Oldfield,Oldfield,MW1,-0.724024666515,51.520894546995,36,24,25
+Castle Without,Castle Without,MW2,-0.62380842514,51.480178972651,34,,
+Furze Platt,Furze Platt,MW4,-0.725480414494953,51.5363854087616,17,,
+Marylebone High Street,Marylebone High Street,MY7,-0.15459,51.52254,,25,
+St James's,St James's,WM5,-0.12162720332856,51.5119769825798,38,,
+Wanstead Village,Wanstead Village,RB4,0.030858,51.57661,38,20,20
+Newbury,Newbury,RB7,0.0829074748964946,51.5694843315237,29,18,18
+Battle,Battle,RD0,-0.944461432664066,51.4529847075166,27,14,
+Horley Central,Horley Central,RG6,-0.162410036780488,51.1612605001364,24,,
+Langley Green,Langley Green,RG3,-0.194181,51.142082,14,,
+St Margarets and North Twickenham,St Margarets and North Twickenham,RHG,-0.341218138106469,51.4531422511004,34,24,26
+Barnes,Barnes,RI1,-0.237335,51.480189,30,19,20
+Mortlake and Barnes Common,Mortlake and Barnes Common,RI2,-0.230427,51.476168,19,16,16
+Old Kent Road,Old Kent Road,SK5,-0.0595528932573422,51.4804994936467,44,25,
+St George's,St George's,SK6,-0.101527038274853,51.4931557048667,32,20,21
+Wallington South,Wallington South,ST4,-0.149723946604927,51.3586596124998,46,26,24
+Beddington North,Beddington North,ST5,-0.141661524779893,51.389286904505,25,22,29
+Worcester Park,Worcester Park,ST6,-0.240414,51.377923,49,20,
+Beddington North,Beddington North,ST8,-0.1364178614733,51.3835652277943,24,24,38
+Teddington,Teddington,TD5,-0.345608290872898,51.4252560360937,,,
+St Dunstan's,St Dunstan's,TH2,-0.0421550991900347,51.5225294860844,46,,
+Lansbury,Lansbury,TH4,-0.00841849265642741,51.5150461674013,50,27,
+Grays Riverside,Grays Riverside,TK1,0.317938,51.477076,24,20,
+Stanford-le-Hope West,Stanford-le-Hope West,TK3,0.439548,51.518162,23,19,
+Tilbury Riverside and Thurrock Park,Tilbury Riverside and Thurrock Park,TK4,0.357953197319231,51.4617571252861,29,,
+West Thurrock and South Stifford,West Thurrock and South Stifford,TK8,0.255133,51.478697,52,29,29
+Thamesfield,Thamesfield,WA9,-0.215824580947572,51.4650325059122,33,19,19
+Queenstown,Queenstown,WAA,-0.141786953606306,51.4794395281222,36,26,28
+Tooting,Tooting,WAB,-0.166524,51.429331,54,25,27
+Northcote,Northcote,WAC,-0.166713485994806,51.4636903568111,43,21,23
+Vincent Square,Vincent Square,WM0,-0.131938,51.494681,34,18,
+West End,West End,WMC,-0.145657269364411,51.5168016452062,55,28,29
+Warwick,Warwick,WMA,-0.147391757027028,51.4932327916861,52,,
+Greenhithe,Greenhithe,ZR1,0.279942529264489,51.4491543603338,47,23,23
+Town,Town,ZR2,0.216185856662181,51.4426702340503,35,29,29
+Bean and Darenth,Bean and Darenth,ZR3,0.280461133037019,51.4315447616649,40,34,33
+Sevenoaks Town and St John's,Sevenoaks Town and St John's,ZV1,0.201437,51.289391,16,21,22
+Sevenoaks Northern,Sevenoaks Northern,ZV3,0.195766572888,51.293759175,,24,24
