@@ -51,8 +51,8 @@ for i in range (0, len(PCLookupList)//100):
     for l in range (j,k):
 #        print(locations["result"][m]["result"])
         if locations["result"][m]["result"] is not None:
-#            WardsDF.loc[l] = [PCLookupList[l], locations["result"][m]["result"]["admin_ward"]]
-            WardsDF.append([PCLookupList[l], locations["result"][m]["result"]["admin_ward"]])
+            WardsDF.loc[l] = [PCLookupList[l], locations["result"][m]["result"]["admin_ward"]]
+#            WardsDF.append([PCLookupList[l], locations["result"][m]["result"]["admin_ward"]])
 
 #        print(WardsDF.loc[l])
         m = m + 1
