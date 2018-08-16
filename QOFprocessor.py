@@ -46,13 +46,18 @@ for i in range (0, len(PCLookupList)//100):
     s = requests.post("https://api.postcodes.io/postcodes", json=d)
     s.json()
     locations = json.loads(s.text)
-    print(locations)
+#    print(locations)
+    m = 0
     for l in range (j,k):
-        WardsDF.loc[l] = [PCLookupList[l], locations["result"][l]["result"]["admin_ward"]]
+#        print(locations["result"][m]["result"])
+        if locations["result"][m]["result"] is not None:
+#            WardsDF.loc[l] = [PCLookupList[l], locations["result"][m]["result"]["admin_ward"]]
+            WardsDF.append([PCLookupList[l], locations["result"][m]["result"]["admin_ward"]])
 
+#        print(WardsDF.loc[l])
+        m = m + 1
     j = j + 100
-    print(WardsDF.head(5))
-
+print(WardsDF)
     # try:
    #      res = locations["result"][0]["admin_ward"]
    #      WardsDF.loc[res] = [postcode, res]
