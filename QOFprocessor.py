@@ -28,15 +28,17 @@ PCLookupList = LondonQofDF["Postcode"].tolist()
 print("PCLookupListLEN " + str(len(PCLookupList)))
 # the api only accepts 100 postcodes at a time
 # make len(PCLookupList) /100 calls to the api
-print(len(PCLookupList) // 100)
-print(len(PCLookupList) % 100)
+PCLookupListIterations = (len(PCLookupList) // 100) + 1
+remainder = len(PCLookupList) % 100
 
 j = 0
 k = 0
 WardsDF = pd.DataFrame(columns=['Postcode', 'Ward'])
 
-for i in range (0, len(PCLookupList)//100):
+for i in range (0, PCLookupListIterations):
     k = j + 100
+    print("look up list")
+    lenLookupList = len(PCLookupList[j:k])
     postData = "{'postcodes' : " + str(PCLookupList[j:k]) + "}"
     postData = postData.replace("'",'"')
     d = json.loads(postData)
@@ -48,6 +50,9 @@ for i in range (0, len(PCLookupList)//100):
     locations = json.loads(s.text)
 #    print(locations)
     m = 0
+    if lenLookupList % 100 != 0:
+        print("lll is " + str(lenLookupList))
+        k = lenLookupList
     for l in range (j,k):
 #        print(locations["result"][m]["result"])
         if locations["result"][m]["result"] is not None:
@@ -57,18 +62,11 @@ for i in range (0, len(PCLookupList)//100):
 #        print(WardsDF.loc[l])
         m = m + 1
     j = j + 100
-print(WardsDF)
-    # try:
-   #      res = locations["result"][0]["admin_ward"]
-   #      WardsDF.loc[res] = [postcode, res]
-   #
-   #  except TypeError:
-   #      NoLoc = "NoLoc" + str(count)
-   #      df.loc[NoLoc] = [NoLoc,mySiteCode, Site['@Longitude'], Site['@Latitude'], myNO2, myPM10, dust]
+WardsDF.to_csv("WardsPractices2")
+# now merge WardsDF with the LondonQofDF
+LondonQofDF = pd.merge(WardsDF, LondonQofDF, left_on='Postcode', right_on='Postcode', how='inner')
+print(LondonQofDF)
 
-
-
-#There may be more than 1 surgery per ward aggregate the surgeries prvalences within the ward
-
-#now the file is ready for rendering in a map
+#There may be more than 1 surgery per ward aggregate the surgeries prevalences within the ward
+#then the file will be ready for rendering in a map
 
