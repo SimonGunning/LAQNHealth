@@ -12,7 +12,7 @@ qofDF.columns = ['RegionName', 'PracticeCode', 'Y1Prevalence', 'Y2Prevalance']
 
 LondonQofDF = qofDF.loc[qofDF['RegionName'] == "LONDON"]
 # returns 1330 rows
-#print(LondonQofDF.head(4))
+print(LondonQofDF.head(10))
 
 #read epracur file
 
@@ -22,18 +22,22 @@ PracticeLocations.columns = ["PracticeCode", "2", "3", "4", "5", "6", "7", "8", 
 
 #print("PrLOc info = " + PracticeLocations.info())
 LondonQofDF = pd.merge(PracticeLocations[["PracticeCode", "Postcode"]], LondonQofDF, left_on='PracticeCode', right_on='PracticeCode', how='inner')
-#print(LondonQofDF.head(5))
+#LondonQofDF = LondonQofDF.head(10)
+
+print(LondonQofDF)
+
 #for each LondonQOF get the Ward. Then merge the ward into the DF
 PCLookupList = LondonQofDF["Postcode"].tolist()
 print("PCLookupListLEN " + str(len(PCLookupList)))
 # the api only accepts 100 postcodes at a time
 # make len(PCLookupList) /100 calls to the api
+#the dups start after here
 PCLookupListIterations = (len(PCLookupList) // 100) + 1
 remainder = len(PCLookupList) % 100
 
 j = 0
 k = 0
-WardsDF = pd.DataFrame(columns=['Postcode', 'Ward'])
+WardsPostCodesDF = pd.DataFrame(columns=['Postcode', 'Ward', 'WardCode'])
 
 for i in range (0, PCLookupListIterations):
     k = j + 100
@@ -48,24 +52,27 @@ for i in range (0, PCLookupListIterations):
     s = requests.post("https://api.postcodes.io/postcodes", json=d)
     s.json()
     locations = json.loads(s.text)
-#    print(locations)
+    print(locations)
     m = 0
     if lenLookupList % 100 != 0:
         print("lll is " + str(lenLookupList))
-        k = lenLookupList
+        k = lenLookupList + j
+        print("new k is " + str(k))
+        print("new j is " + str(j))
     for l in range (j,k):
 #        print(locations["result"][m]["result"])
         if locations["result"][m]["result"] is not None:
-            WardsDF.loc[l] = [PCLookupList[l], locations["result"][m]["result"]["admin_ward"]]
+            WardsPostCodesDF.loc[l] = [PCLookupList[l], locations["result"][m]["result"]["admin_ward"], locations["result"][m]["result"]["codes"]["admin_ward"]]
 #            WardsDF.append([PCLookupList[l], locations["result"][m]["result"]["admin_ward"]])
 
 #        print(WardsDF.loc[l])
         m = m + 1
     j = j + 100
-WardsDF.to_csv("WardsPractices2")
+WardsPostCodesDF.drop_duplicates(subset="Postcode", keep="first", inplace=True)
+WardsPostCodesDF.to_csv("WardsPostcode2")
 # now merge WardsDF with the LondonQofDF
-LondonQofDF = pd.merge(WardsDF, LondonQofDF, left_on='Postcode', right_on='Postcode', how='inner')
-print(LondonQofDF)
+LondonQofDF = pd.merge(WardsPostCodesDF, LondonQofDF, left_on='Postcode', right_on='Postcode', how='inner')
+LondonQofDF.to_csv("londonQOF1")
 
 #There may be more than 1 surgery per ward aggregate the surgeries prevalences within the ward
 #then the file will be ready for rendering in a map
