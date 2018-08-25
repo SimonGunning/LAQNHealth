@@ -6,8 +6,8 @@ import requests
 import json
 
 qofDF = pd.read_excel('C:\\Users\\gunning\\Documents\\simon\\MSCProject\\qof-1516-prev-ach-exc-resp-prac-v2.xlsx',
-                      sheet_name='AST', usecols=[2,9,14,17])
-qofDF.columns = ['RegionName', 'PracticeCode', 'Y1Prevalence', 'Y2Prevalance']
+                      sheet_name='AST', usecols=[2,9,12,13])
+qofDF.columns = ['RegionName', 'PracticeCode', 'ListSize', 'Register']
 #print(qofDF.head(15))
 
 LondonQofDF = qofDF.loc[qofDF['RegionName'] == "LONDON"]

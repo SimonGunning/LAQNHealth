@@ -10,15 +10,15 @@ from shapely.geometry import Point
 import numpy as np
 from matplotlib import pyplot as plt
 import pickle
-
-LondonQOF = pd.read_csv('C:\\Users\\gunning\\Documents\\Anatest\\londonQOF1')
+# dtype = {'name': str,'review': str]
+LondonQOF = pd.read_csv('C:\\Users\\gunning\\Documents\\Anatest\\LondonQOFAggregated1.csv')
 LondonQOFDF = gpd.GeoDataFrame(LondonQOF)
 
 wardDF = gpd.read_file('C:\\Users\\gunning\\Documents\\simon\\MSCProject\\\London-wards-2014\\London-wards-2014 (1)\\London-wards-2014_ESRI\\London_Ward.shp')
 
-LondonQOFDF = pd.merge(wardDF, LondonQOFDF, left_on='NAME', right_on='Ward', how='inner')
+LondonQOFDF = pd.merge(wardDF, LondonQOFDF, left_on='GSS_CODE', right_on='WardCode', how='inner')
 
-print(wardDF.head(5))
+print(LondonQOFDF.head(5))
 
 base = wardDF.plot(color='white', edgecolor='black')
 plt.title("Ward and Asthma prevalence map")
@@ -28,7 +28,7 @@ plt.axis("off")
 #ax.annotate("Source: London Datastore, 2014",xy=(0.1, .08),  xycoords="figure fraction", horizontalalignment="left",
 #verticalalignment="top", fontsize=12, color="#555555")
 
-LondonQOFDF.plot(ax=base,column='Y1Prevalence', cmap='OrRd')
+LondonQOFDF.plot(ax=base,column='Prevalence_perc', cmap='OrRd')
 #fig, ax = plt(1, figsize=(10, 6))
 sm = plt.cm.ScalarMappable(cmap='OrRd', norm=plt.Normalize(vmin=10, vmax=100))
 sm._A = []

@@ -22,7 +22,7 @@ LondonQOF.set_index('WardCode')
 LondonQOF.apply(pd.to_numeric, errors='ignore')
 print(LondonQOF.dtypes)
 
-LondonQOF[['Y1Prevalence','Y2Prevalance']] = LondonQOF[['Y1Prevalence','Y2Prevalance']].apply(pd.to_numeric, errors='coerce')
+LondonQOF[['Register','ListSize']] = LondonQOF[['Register','ListSize']].apply(pd.to_numeric, errors='coerce')
 print(LondonQOF.dtypes)
 
 #print(LondonQOF.groupby("WardCode").groups)
@@ -33,14 +33,16 @@ for name,group in grouped:
 #     print(group)
 #    print(grouped["Y2Prevalance"].sum())
 #    print("type of thing" + str(type(grouped["Y1Prevalence"].sum())))
-    LondonQOFAggregated1 = grouped["Y1Prevalence"].sum()
-    LondonQOFAggregated2 = grouped["Y2Prevalance"].sum()
+    LondonQOFAggregated1 = grouped["Register"].sum()
+    LondonQOFAggregated2 = grouped["ListSize"].sum()
 
 #    print(group["PracticeCode"])
 LondonQOFAggregated1 = pd.merge(LondonQOFAggregated1.to_frame(), LondonQOFAggregated2.to_frame(), left_index=True, right_index=True, how='inner')
-#grouped = LondonQOF.groupby(LondonQOF.index)["Y1Prevalence"].sum()
+#
+LondonQOFAggregated1['Prevalence_perc'] = LondonQOFAggregated1['Register']/LondonQOFAggregated1['ListSize']
+
 print(LondonQOFAggregated1.head(3))
 
-
+LondonQOFAggregated1.to_csv("LondonQOFAggregated1.csv")
 
 
