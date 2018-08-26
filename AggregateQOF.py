@@ -4,23 +4,23 @@ Created on Sat Mar  3 18:24:34 2018
 
 @author: gunning
 """
-import geopandas as gpd
 import pandas as pd
 from shapely.geometry import Point
 import numpy as np
-from matplotlib import pyplot as plt
 import pickle
 
 LondonQOF = pd.read_csv('C:\\Users\\gunning\\Documents\\Anatest\\londonQOF1')
 print(LondonQOF.columns.values)
+print(LondonQOF["Year"][2])
+year = LondonQOF["Year"][2]
+
 #LondonQOFAggregated = pd.DataFrame(columns=['Postcode', 'Ward', 'PracticeCode', 'RegionName', 'Y1Prevalence', 'Y2Prevalence'])
-LondonQOFAggregated1 = pd.DataFrame(columns=['SumPrev'])
-LondonQOFAggregated2 = pd.DataFrame(columns=['SumPost'])
+#LondonQOFAggregated1 = pd.DataFrame(columns=['SumPrev'])
+#LondonQOFAggregated2 = pd.DataFrame(columns=['SumPost'])
 
 #print(LondonQOF.head(5))
 LondonQOF.set_index('WardCode')
 LondonQOF.apply(pd.to_numeric, errors='ignore')
-print(LondonQOF.dtypes)
 
 LondonQOF[['Register','ListSize']] = LondonQOF[['Register','ListSize']].apply(pd.to_numeric, errors='coerce')
 print(LondonQOF.dtypes)
@@ -40,6 +40,7 @@ for name,group in grouped:
 LondonQOFAggregated1 = pd.merge(LondonQOFAggregated1.to_frame(), LondonQOFAggregated2.to_frame(), left_index=True, right_index=True, how='inner')
 #
 LondonQOFAggregated1['Prevalence_perc'] = LondonQOFAggregated1['Register']/LondonQOFAggregated1['ListSize']
+LondonQOFAggregated1['Year'] = year
 
 print(LondonQOFAggregated1.head(3))
 

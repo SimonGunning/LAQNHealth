@@ -2,14 +2,23 @@
 # This requires the latest version of Pandas
 import pandas as pd
 import requests
-
 import json
+from tkinter  import Tk
+from tkinter.filedialog import askopenfilename
+print("Enter the year of the QOF")
+year = input("Year =")
+print("Enter the disease that you wish to get data for (AST, COPD,....")
+disease = input("Disease =")
 
-qofDF = pd.read_excel('C:\\Users\\gunning\\Documents\\simon\\MSCProject\\qof-1516-prev-ach-exc-resp-prac-v2.xlsx',
-                      sheet_name='AST', usecols=[2,9,12,13])
+Tk().withdraw() # we don't want a full GUI, so keep the root window from appearing
+filename = askopenfilename() # show an "Open" dialog box and return the path to the selected file
+print(filename)
+#'C:\\Users\\gunning\\Documents\\simon\\MSCProject\\qof-1516-prev-ach-exc-resp-prac-v2.xlsx'
+qofDF = pd.read_excel(filename, sheet_name='AST', usecols=[2,9,12,13])
 qofDF.columns = ['RegionName', 'PracticeCode', 'ListSize', 'Register']
 #print(qofDF.head(15))
-
+qofDF['Year'] = year
+#qofDF['Year'] = year
 LondonQofDF = qofDF.loc[qofDF['RegionName'] == "LONDON"]
 # returns 1330 rows
 print(LondonQofDF.head(10))
