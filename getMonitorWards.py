@@ -70,7 +70,8 @@ for Site in monitors["SiteObjectives"]["Site"]:
 
     count = count +1
 #print(df)
-df.to_csv("monlocs")
+MonitorWardsFile = "MonitorWardsFile" + year
+df.to_csv("MonitorWardsFile")
 #with open('parrot1.pickle', 'wb') as handle:
 #    pickle.dump(df, handle, protocol=pickle.HIGHEST_PROTOCOL)
 

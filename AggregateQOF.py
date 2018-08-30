@@ -5,11 +5,15 @@ Created on Sat Mar  3 18:24:34 2018
 @author: gunning
 """
 import pandas as pd
-from shapely.geometry import Point
-import numpy as np
-import pickle
-
-LondonQOF = pd.read_csv('C:\\Users\\gunning\\Documents\\Anatest\\londonQOF1')
+from tkinter  import Tk
+from tkinter.filedialog import askopenfilename
+#from shapely.geometry import Point
+#import numpy as np
+#import pickle
+print("please select a QOFProcessor output file")
+Tk().withdraw() # we don't want a full GUI, so keep the root window from appearing
+filename = askopenfilename() # show an "Open" dialog box and return the path to the selected file
+LondonQOF = pd.read_csv(filename)
 print(LondonQOF.columns.values)
 print(LondonQOF["Year"][2])
 year = LondonQOF["Year"][2]
@@ -43,7 +47,7 @@ LondonQOFAggregated1['Prevalence_perc'] = LondonQOFAggregated1['Register']/Londo
 LondonQOFAggregated1['Year'] = year
 
 print(LondonQOFAggregated1.head(3))
-
+LondonQOFAggregatedFName = "LondonQOFAggregatedFName" + year
 LondonQOFAggregated1.to_csv("LondonQOFAggregated1.csv")
 
 
