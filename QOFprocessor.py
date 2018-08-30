@@ -5,16 +5,27 @@ import requests
 import json
 from tkinter  import Tk
 from tkinter.filedialog import askopenfilename
+QOFMetaData = [[2013,8,9],[2014,14,15],[2015,12,13],[2016,13,14],[2017,16,17]]
+QOFMetaDatadf = pd.DataFrame(QOFMetaData,columns=['Year','ListSizePosition','RegisterPosition'])
+QOFMetaDatadf = QOFMetaDatadf.set_index('Year')
+print(QOFMetaDatadf)
+
+
 print("Enter the year of the QOF")
 year = input("Year =")
+print(QOFMetaDatadf.loc[int(year)]['ListSizePosition'])
+
 print("Enter the disease that you wish to get data for (AST, COPD,....")
 disease = input("Disease =")
 
 Tk().withdraw() # we don't want a full GUI, so keep the root window from appearing
 filename = askopenfilename() # show an "Open" dialog box and return the path to the selected file
 print(filename)
-#'C:\\Users\\gunning\\Documents\\simon\\MSCProject\\qof-1516-prev-ach-exc-resp-prac-v2.xlsx'
-qofDF = pd.read_excel(filename, sheet_name='AST', usecols=[2,9,12,13])
+#qofDF = pd.read_excel(filename, sheet_name='AST', usecols=[2,9,12,13])
+qofDF = pd.read_excel(filename, sheet_name='AST',
+                      usecols=[2,9,QOFMetaDatadf.loc[int(year)]['ListSizePosition'],
+                               QOFMetaDatadf.loc[int(year)]['RegisterPosition']])
+
 qofDF.columns = ['RegionName', 'PracticeCode', 'ListSize', 'Register']
 #print(qofDF.head(15))
 qofDF['Year'] = year
@@ -24,8 +35,11 @@ LondonQofDF = qofDF.loc[qofDF['RegionName'] == "LONDON"]
 print(LondonQofDF.head(10))
 
 #read epracur file
+Tk().withdraw() # we don't want a full GUI, so keep the root window from appearing
+filename = askopenfilename() # show an "Open" dialog box and return the path to the selected file
+print(filename)
 
-PracticeLocations = pd.read_csv('C:\\Users\\gunning\\Documents\\simon\\MSCProject\\epraccur.csv')
+PracticeLocations = pd.read_csv(filename)
 PracticeLocations.columns = ["PracticeCode", "2", "3", "4", "5", "6", "7", "8", "9","Postcode","11","12","13","14","15","16","17","18","19","20","21","22","23","24","25","26","27"]
 #print(PracticeLocations[["PracticeCode", "Postcode"]])
 
