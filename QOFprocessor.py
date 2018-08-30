@@ -46,7 +46,7 @@ remainder = len(PCLookupList) % 100
 
 j = 0
 k = 0
-WardsPostCodesDF = pd.DataFrame(columns=['Postcode', 'Ward', 'WardCode'])
+WardsPostCodesDF = pd.DataFrame(columns=['Postcode', 'Ward', 'WardCode','PracticeLongitude','PracticeLatitude'])
 
 for i in range (0, PCLookupListIterations):
     k = j + 100
@@ -71,7 +71,10 @@ for i in range (0, PCLookupListIterations):
     for l in range (j,k):
 #        print(locations["result"][m]["result"])
         if locations["result"][m]["result"] is not None:
-            WardsPostCodesDF.loc[l] = [PCLookupList[l], locations["result"][m]["result"]["admin_ward"], locations["result"][m]["result"]["codes"]["admin_ward"]]
+            WardsPostCodesDF.loc[l] = [PCLookupList[l], locations["result"][m]["result"]["admin_ward"],
+                                       locations["result"][m]["result"]["codes"]["admin_ward"],
+                                       locations["result"][m]["result"]["longitude"],
+                                       locations["result"][m]["result"]["latitude"]]
 #            WardsDF.append([PCLookupList[l], locations["result"][m]["result"]["admin_ward"]])
 
 #        print(WardsDF.loc[l])
@@ -81,7 +84,8 @@ WardsPostCodesDF.drop_duplicates(subset="Postcode", keep="first", inplace=True)
 WardsPostCodesDF.to_csv("WardsPostcode2")
 # now merge WardsDF with the LondonQofDF
 LondonQofDF = pd.merge(WardsPostCodesDF, LondonQofDF, left_on='Postcode', right_on='Postcode', how='inner')
-LondonQofDF.to_csv("londonQOF1")
+outPutFileName = "LondonQOF" + year
+LondonQofDF.to_csv(outPutFileName)
 
 #There may be more than 1 surgery per ward aggregate the surgeries prevalences within the ward
 #then the file will be ready for rendering in a map
