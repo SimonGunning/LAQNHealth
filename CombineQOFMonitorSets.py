@@ -26,7 +26,7 @@ SuperDF = pd.merge(SuperDF, PollutionDF, left_on='WardCode', right_on='WardCode'
 
 print(SuperDF)
 
-
-SuperDF.to_csv("SuperDF.csv")
+combinedFileName = "CombinedFile-" + year
+SuperDF.to_csv(combinedFileName)
 
 

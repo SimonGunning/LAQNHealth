@@ -3,6 +3,9 @@
 Created on Sat Mar  3 18:24:34 2018
 
 @author: gunning
+
+This program takes the output from the QOFProcessor. It sums the list and prevalence for
+each practice in each ward. Then it outputs a file called LondonQOFAggregated-yyyy
 """
 import pandas as pd
 from tkinter  import Tk
@@ -47,7 +50,7 @@ LondonQOFAggregated1['Prevalence_perc'] = LondonQOFAggregated1['Register']/Londo
 LondonQOFAggregated1['Year'] = year
 
 print(LondonQOFAggregated1.head(3))
-LondonQOFAggregatedFName = "LondonQOFAggregatedFName" + year
-LondonQOFAggregated1.to_csv("LondonQOFAggregated1.csv")
+LondonQOFAggregatedFName = "LondonQOFAggregated-" + year
+LondonQOFAggregated1.to_csv(LondonQOFAggregatedFName)
 
 
