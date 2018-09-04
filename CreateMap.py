@@ -5,7 +5,7 @@ import numpy as np
 from matplotlib import pyplot as plt
 from tkinter  import Tk
 from tkinter.filedialog import askopenfilename
-print("Select the Combined QOF and Monitor file form the .. process")
+print("Select the Aggregated QOF file from the AggregateQOF process")
 year = input("Year =")
 Tk().withdraw() # we don't want a full GUI, so keep the root window from appearing
 filename = askopenfilename(title = "Select Monitors file") # show an "Open" dialog box and return the path to the selected file
