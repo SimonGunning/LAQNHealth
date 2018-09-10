@@ -36,24 +36,32 @@ q.set_yticks([])
 title=plt.title('Queen Adjacency')
 plt.show()
 # reduce the adjacency matrix to match the data
-print("warcos")
+#print("warcos")
 #print(result["WardCode"])
-geo=geo[geo.index.isin(result["WardCode"])]
+geo=geo[geo.index.isin(["E05000030", "E05000039"])]
 geo.reset_index().to_file('Data/SF_BlockGroups10_Cleaned.shp')
 #gdf=gpd.GeoDataFrame(data, geometry=geo.geometry)
 w=ps.queen_from_shapefile('Data/SF_BlockGroups10_Cleaned.shp', 'GSS_CODE')
 print(w.cardinalities.values())
 #row standardise the adjacency matrix
 y=gdf[pollutant]
-print("y is ")
-print(y)
+yNA = y.values
+print("yNA is ")
+print(yNA)
 w.transform='r'
-mi = ps.Moran(y, w)
-pd.Series(index=['Morans I','Z-Score','P-Value'],data=[mi.I, mi.z_norm, mi.p_norm])
-#Y=data[YVar].as_matrix().reshape((len(data),1))
-#X=data[XVars].as_matrix()
+print("typ x is ")
+print(type(x))
+print("typ y is ")
+print(type(y))
+print("typ w is ")
+print(type(w))
+#mi = ps.Moran(Y, w)
+#pd.Series(index=['Morans I','Z-Score','P-Value'],data=[mi.I, mi.z_norm, mi.p_norm])
 
-ols=ps.spreg.OLS(x,y,w=w,name_y="pollutant", name_x="disease prevalence",nonspat_diag=False, spat_diag=True)
+Y=result[pollutant].as_matrix().reshape((len(result),1))
+X=result["Prevalence_perc"].as_matrix().reshape((len(result),1))
+
+ols=ps.spreg.OLS(X, Y, w=w, nonspat_diag=False, spat_diag=True)
 print(ols.summary)
 
 
