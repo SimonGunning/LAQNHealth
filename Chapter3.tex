@@ -1,0 +1,31 @@
+% Chapter 3
+
+\chapter{Background} % Main chapter title
+
+\label{Chapter3} % For referencing the chapter elsewhere, use \ref{Chapter1} 
+
+%----------------------------------------------------------------------------------------
+
+% Define some commands to keep the formatting separated from the content 
+
+
+%----------------------------------------------------------------------------------------
+
+\section{Geographical Information Systems}
+John Snow famously used a combination of maps and statistics to identify the source of a cholera outbreak in London in 1854. He mapped the locations of where the cholera occurred and used this information to identify the source of the cholera as a water pump in Soho. This was one of the first instances of combining geographic and health data in the field of epidemiology.
+With the advent of computer systems means of storing and processing maps have been developed. Maps can be stored as raster images or as vectors files. Vector images are defined in terms of points which are connected by lines to form polygons and other shapes. An advantage of using vector files to store maps is that the images can be exanded without loss of resolution.
+The maps that I use for this project are stored as shapefiles. Shapefiles for London can be download from the London local government site https://data.london.gov.uk/ . The shapefile is actually a folder containing at least 3 different file types: .shp, .shx and .dbf.
+
+In order to render maps from shapefiles you need to specify the coordinate reference system (CRS) that you will use. This defines the projection of the map. This is the way that points on an ellipsoid (the earth) are mapped onto a plane (the map). The map of London wards that I used had a default CRS of “OSGB36” which I converted to “epsg:4326” in order to position the monitors onto the map using longitude and latitude.
+When running statistical analysis on geographic data it is necessary to factor in the extent to which events that are close to each other are likely to be similar. This is known as spatial dependency. Spatial dependency means that we cannot necessarily assume that the occurrence of nearby events is independent. 
+One of the assumptions of ordinary least squares regression is that all observations are independent and identically distributed. If we are to perform regression analysis on geographic data it is useful to compensate for spatial dependency.
+A linear regression line will have the formula $Y = a + bX  + \epsilon$  .
+The spatial lag model includes a spatial lag of the dependent variable (average value in neighbouring units). The idea here is that the outcome in a given area will depend not only on the characteristics of that area, but also on the outcome in adjacent areas. The spatial lag model looks just like the standard OLS model with an added autoregressive term:
+$y = \rhoWY +  bX  + \epsilon $
+
+
+$\rho$ is a spatial autoregressive term WY is the spatial lag of the dependent variable.
+ In order to perform a spatial regression we create an adjacency matrix that defines links between geographic areas. So for example if we were modelling a ward the matrix would hold links to the surrounding wards. This can be generated from the shapefile. There are different algorithms that can be used known as rook or queen. These represent building links in a similar fashion to the way the chess pieces move. Then we assign weights to the links. The weights can be binary (1 for each neighbour) or row standardized (4 neighbours will each be weighted 25\%). There will be weight for every Y term. Then we can use a specialised library like pysal to run the regression passing in the weighted matrix.
+This geographic approach to analysing data can be applied to many scenarios apart from epidemiology. An example is behaviour (e.g. crime, shopping) modelled with geographic data.
+Ref http://andrewgaidus.com/Spatial_Econonometric_Modeling/
+

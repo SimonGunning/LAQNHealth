@@ -1,0 +1,38 @@
+% Chapter 1
+
+\chapter{Introduction} % Main chapter title
+
+\label{Chapter1} % For referencing the chapter elsewhere, use \ref{Chapter1} 
+
+%----------------------------------------------------------------------------------------
+
+% Define some commands to keep the formatting separated from the content 
+\newcommand{\keyword}[1]{\textbf{#1}}
+\newcommand{\tabhead}[1]{\textbf{#1}}
+\newcommand{\code}[1]{\texttt{#1}}
+\newcommand{\file}[1]{\texttt{\bfseries#1}}
+\newcommand{\option}[1]{\texttt{\itshape#1}}
+
+%----------------------------------------------------------------------------------------
+
+\section{Welcome and Thank You}
+Air pollution has long been associated with poor health. There is epidemiological evidence for an association between traffic pollution and respiratory disease. 
+
+This project will explore and visualise disease prevalence data and traffic air pollution data. The project will gather data on air pollution in London and combine it with epidemiological data from the National Health Service (NHS). Data Science tools will then be used to analyse the data and methods developed to visualise the data and the results of the analysis. This project will require both a software design and implementation effort and a statistical modelling and analysis exercise.
+The disease that will be considered is Asthma. However, the software developed for the project will also be able to be used to investigate other diseases. Asthma is a disease of the lungs and airways. It is thought that its causes are both environmental and genetic. A significant environmental factor is air quality. Air quality is thought to play a part in the incidence of Asthma by causing inflammation to the lungs and airways. Air quality is affected by several types of pollution including smoking, industrial pollution and traffic pollution. There is medical literature describing the mechanisms of how airborne pollution can cause Asthma. It is thought that it is caused by a combination of genetic and environmental factors. 
+The UK National Health Service (NHS) accurately monitors several diseases including Asthma at the level of General Practitioner (GP) Practices. A GP Practice is a local provider of medical services. There are approximately 1,000 GP Practices in Greater London. Data about disease prevalence at GP practices is made available by NHS Digital as part of the Qualities and Outcomes Framework (QOF). The QOF is a system for measuring GPs in the National Health Service (NHS). It is compiled annually and aggregates data at a practice level. The data is anonymous and it does not refer to specific patients. The data for each year (1st April to 31st March) is held in spreadsheets which can be downloaded from the NHS Digital website, https://digital.nhs.uk/ .
+
+The spreadsheets contain details of the Practices including the number of patients known as the ListSize. The QOF spreadsheet also contains the number of patients that suffer from various diseases this is known as the Register. There is a prevalence of each disease calculated for each practice. Each practice has a name and a unique Practice Code, e.g. “M85063”. The Practices data also include Region Names and Region Codes, e.g., London which has the code “Y56”.
+
+Air pollution data is provided in statistics published by the Department for Environment, Food and Rural Affairs (DEFRA). DEFRA manages a national network of monitoring stations which monitor airborne pollution levels. Their monitoring covers the whole of the UK. There are around 300 monitoring sites around the whole of the UK. A greater concentration of monitors for a smaller geographic area is provided by the London Air Quality Network, which manages monitoring sites for London. The London Air Quality Network (LAQN) is a project run by King’s College London. LAQN has around 100 monitors in the Greater London Area. The monitors measure Nitrogen Dioxide (NO2), particles (PM10) and DUST. The data from the LAQN is available as Web Services from their website. Details of the API can be found at http://api.erg.kcl.ac.uk/AirQuality/help . 
+As the QOF is an annual collection of statistics I have used annual statistics from the LAQN. There is a webservice that returns annual summaries of pollution levels for all monitors. The results are in Javascript Object Notation (JSON). For each Site there is longitude, latitude and an annual mean for different types of pollution. Not all sites collect data on all pollutants. The readings are expressed as micrograms per cubic meter, ug/m3.
+Because of the relatively high number of monitors for London I have chosen to restrict the health data to London GP practices. So when I process the QOF data I restrict the data to the London region  based on the “Y56” code. As I plan to visualise the datasets I have chosen a geographical sub region of London for the visualization. I have chosen the Ward level. A ward is a unit of electoral geography.  Wards are smaller than boroughs and contain on average 5,500 people. There is a larger geographical unit called a Clinical Commissioning Group which is recorded in the QOF. However I was concerned that the effects of pollution are based on the distances from the sources so a smaller area seemed preferable. In order to find out which ward each practice belongs to I use a reference file provided by NHS Digital which gives the PostCode for each Practice Code. I then call a web service on https://postcodes.io/ which provides location information including Ward, WardCode, latitude and longitude. I use another process to aggregate QOF data for each ward. I do not use the prevalence per practice from the QOF. Instead I recalculate prevalences based on ListSize and Register. This is to avoid any version of Simpson’s Paradox.
+The annual pollution data also needs to be processed. For each monitor there is a latitude and longitude. This is used in a web service provided by https://postcodes.io/ to look up the ward and ward code for each monitor. The outputs from the QOF process and the Pollution Monitors process form the basis of subsequent map production and statistical analysis. There is further descriptions of the processing in Section XXXX
+To the best of my knowledge no attempt has so far been made to analyse the co-occurrence in geographic wards of air pollution levels based on these monitors and particular disease occurrences for London.
+
+
+See Particulate air pollution and acute health effects , Lancet Issue 8943, panel ProfA.SeatonMD D.GoddenMD W.MacNeeMD K.DonaldsonPhD
+
+
+%----------------------------------------------------------------------------------------
+

@@ -1,0 +1,26 @@
+% Chapter 4
+
+\chapter{Software Architecture} % Main chapter title
+
+\label{Chapter4} % For referencing the chapter elsewhere, use \ref{Chapter1} 
+
+%----------------------------------------------------------------------------------------
+
+% Define some commands to keep the formatting separated from the content 
+
+
+%----------------------------------------------------------------------------------------
+
+\section{Software Architecture}
+I have developed the code for the project using Python. I have used the Pandas library throughout. This is used to hold the data in Dataframes. Dataframes are an extremely useful way to hold large amounts of data in a 2 dimensional structure that is similar to a spreadsheet of a SQL Table. In the project I merge, concatenate and aggregate Dataframes.
+Geopandas is a library that provides the capability to enhance a Dataframe with geographic data (from shapefiles). This data can then be displayed as maps using the matplotlib library.
+For standard regressions I used the sklearn library.
+To create the spatial weights matrix I have used the pysal library. I found this library difficult to use, there is a new version due at the end of 2018 which may be more simple.
+The overall architecture pattern is a pipeline. Data is persisted in between steps in the pipeline in csv files. This is more convenient than using a database as the files are easier to check and there is no technical overhead. 
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+
