@@ -1,5 +1,5 @@
-#This program will read the aggregated QOF File.
-# Then it will read the Monitors file for the pollution data
+#This program will read the aggregated QOF File for a year.
+# Then it will read the Monitors file for the pollution data from the same year.
 # Then it will merge them both based on WardCode
 import pandas as pd
 import requests
@@ -11,14 +11,13 @@ year = input("Year =")
 
 Tk().withdraw() # we don't want a full GUI, so keep the root window from appearing
 
-filename = askopenfilename() # show an "Open" dialog box and return the path to the selected file
-print(filename)
+filename = askopenfilename(title='Select the LondonQOFAggregated-yyyy file you want to use') # show an "Open" dialog box and return the path to the selected file
 
 SuperDF = pd.read_csv(filename)
-SuperDF.columns = ["WardCode","Register","ListSize","Prevalence_perc", "Year"]
+SuperDF.columns = ["WardCode","Ward","Register","ListSize","Prevalence_perc", "Year"]
 print("Select Pollution File")
 
-filename = askopenfilename() # show an "Open" dialog box and return the path to the selected file
+filename = askopenfilename(title='Select the MonitorWardsFile-yyyy file you want to use') # show an "Open" dialog box and return the path to the selected file
 print(filename)
 PollutionDF = pd.read_csv(filename)
 PollutionDF.columns = ["WardCode", "Year","Ward","Monitor","Longitude","Latitude","NO2","PM10","DUST"]

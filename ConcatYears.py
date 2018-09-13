@@ -1,5 +1,5 @@
-#Read the superDFs concatenate them and perform regressions
-# This requires the latest version of Pandas
+#Read the combined files and  concatenates them
+#  to produce a single file
 import matplotlib.pyplot as plt
 import numpy as np
 from sklearn import datasets, linear_model
@@ -20,7 +20,7 @@ for i in range (0 , len(fileList)):
     frames.append(ADF)
     ADF.iloc[0:0]
 result = pd.concat(frames, ignore_index=True)
-result.to_csv("HealthPolltionDS.csv")
+result.to_csv("HealthPollutionDS.csv")
 
 
 
