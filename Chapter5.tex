@@ -12,21 +12,118 @@
 %----------------------------------------------------------------------------------------
 
 \section{Trend Graphs}
-The analysis covers 5 years, from 2012 to 2016. During that time there has been a small decline in the prevalence of Asthma as shown in the following graph.
+The analysis covers 5 years, from 2012 to 2016. It only covers the GP Practices in London. During that time there has been a small decline in the prevalence of Asthma as shown in Figure \ref{fig:AsthmaPrevalence}. This graph shows annual average levels for all of London as a percentage of patients that are on the Practice list that are recorded as suffering from Asthma. The range is from 2.0 percent to 9.2 percent.
+
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{Figures/AsthmaPrevalenceTrendGraph}
 \decoRule
-\caption[An Map]{Asthma prevalence over time).}
-\label{fig:MyMap}
+\caption[Asthma Prevalence]{Asthma prevalence over time).}
+\label{fig:AsthmaPrevalence}
 \end{figure}
-There has also been a small decline in the levels of NO2 and PM10 pollutants as recorded by the monitors.
+
+
+
+There has also been a small decline in the levels of NO2 and PM10 pollutants as recorded by the monitors. This is shown in Figure \ref{fig:PollutionTrend}.
+The graph shows the annual mean levels of the NO2 and PM10. These pollutants are the most commonly measured by the LAQN network. There are 330 readings in the dataset for NO2 in a range from 20 to 185 ug/m3 . There are 286 readings for PM10 in a range from 12 to 43 ug/m3 .
+
+\begin{figure}
 \centering
 \includegraphics[width=\textwidth]{Figures/PollutionTrendGraph}
 \decoRule
-\caption[An Map]{Pollution trend over time).}
-\label{fig:MyMap}
+\caption[Pollution trend]{Pollution trend over time}
+\label{fig:PollutionTrend}
 \end{figure}
+
+\section{Maps}
+The following choropleth maps were generated from the monitor files and the aggregated QOF files. 
+See  \ref{fig:2012NO2} , \ref{fig:2013NO2} , \ref{fig:2014NO2} ,\ref{fig:2015NO2} ,\ref{fig:2016NO2} .
+The maps also list the top 3 wards for pollution and the top 3 wards for Asthma prevalence. These maps are best viewed on a website or using the output files from matplotlib rather than in a printed document. This allows the user to zoom in.
+
+A visual inspection of the graphs shows that the monitors (in red) are not uniformly distributed throughout London. It also shows that the wards which have the highest incidence of Asthma do not correspond with the monitors that have the highest readings.There also appears to be a cluster of wards (around inner west London) that have low levels of asthma but a large number of monitors with relatively high pollution readings. This is where the maps may suggest that we could look for alternative predictors. For example, this is a relatively wealthy area of London and so it may be worth investigating the relationship between income and asthma prevalence.
+
+
+%\makeatletter
+%\setlength{\@fptop}{0pt}
+%\setlength{\@fpbot}{0pt plus 1fil}
+%\makeatother
+
+\begin{figure}[]
+	\centering
+	\hspace*{-2cm}\includegraphics[scale=0.55, angle=90]{Figures/2012NO2}
+	
+	%\decoRule
+	\caption[2012NO2]{2012 NO2}
+	\label{fig:2012NO2}
+\end{figure}
+\begin{figure}[]
+	\centering
+	\hspace*{-2cm}\includegraphics[scale=0.55, angle=90]{Figures/2013NO2}
+	
+	%\decoRule
+	\caption[2013NO2]{2013 NO2}
+	\label{fig:2013NO2}
+\end{figure}
+
+\begin{figure}[]
+	\centering
+	\hspace*{-2cm}\includegraphics[scale=0.55, angle=90]{Figures/2014NO2}
+	
+	%\decoRule
+	\caption[2014NO2]{2014 NO2}
+	\label{fig:2014NO2}
+\end{figure}
+\begin{figure}[]
+	\centering
+	\hspace*{-2cm}\includegraphics[scale=0.55, angle=90]{Figures/2015NO2}
+	
+	%\decoRule
+	\caption[2015NO2]{2015 NO2}
+	\label{fig:2015NO2}
+\end{figure}
+\begin{figure}[]
+	\centering
+	\hspace*{-2cm}\includegraphics[scale=0.55, angle=90]{Figures/2016NO2}
+	
+	%\decoRule
+	\caption[2016NO2]{2016 NO2}
+	\label{fig:2016NO2}
+\end{figure}
+%------------------------------------------------------------------------------------------
+\section{Regression results}
+The following results were achieved by running a linear regression using the asthma prevalence as the dependant variable and NO2 concentration as the independant variable.
+
+
+\begin{verbatim}
+
+Results of standard Linear Regression
+Rsqared = 0.06281550170117967
+  y = column_or_1d(y, warn=True)
+Intercept = [76.10504363]
+Coefficients: 
+ [[-5.4019187]]
+Results of Logistic Regression
+LogisticRegression(C=1.0, class_weight=None, dual=False, fit_intercept=True,
+          intercept_scaling=1, max_iter=100, multi_class='ovr', n_jobs=1,
+          penalty='l2', random_state=None, solver='liblinear', tol=0.0001,
+          verbose=0, warm_start=False)
+log score
+0.045454545454545456
+\end{verbatim}
+
+The following scatterplot shows the regression line.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{Figures/Birkbeck-Logo-Colour}
+\decoRule
+\caption[Scatterplot]{Scatterplot and Regression Line}
+\label{fig:Scatterplot}
+\end{figure}
+
+%-----------------------------------------------------------------------------------------
+
+
 
 %----------------------------------------------------------------------------------------
 
