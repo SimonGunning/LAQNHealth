@@ -2,7 +2,7 @@
 
 \chapter{Results} % Main chapter title
 
-\label{Chapter5} % For referencing the chapter elsewhere, use \ref{Chapter1} 
+\label{Chapter5} % For referencing the chapter elsewhere, use \ref{Chapter5} 
 
 %----------------------------------------------------------------------------------------
 
@@ -10,6 +10,11 @@
 
 
 %----------------------------------------------------------------------------------------
+\section{Data Description}
+The dataset that is produced from the analysis phase is called HealthPollutionDS and it consists of 378 rows. Each row has: Ward, WardCode, Register, ListSize, Prevalence, Year, Monitor, Longitude, Latitude, NO2, PM10 and DUST. The longitude and latitude describe the position of any monitor within the ward. There are missing readings for some pollutants for some monitors. There can be a variation in the size of the population of a Ward so the prevalence of Asthma amongst patients on the List is calculated.
+
+
+
 
 \section{Trend Graphs}
 The analysis covers 5 years, from 2012 to 2016. It only covers the GP Practices in London. During that time there has been a small decline in the prevalence of Asthma as shown in Figure \ref{fig:AsthmaPrevalence}. This graph shows annual average levels for all of London as a percentage of patients that are on the Practice list that are recorded as suffering from Asthma. The range is from 2.0 percent to 9.2 percent.
@@ -18,7 +23,7 @@ The analysis covers 5 years, from 2012 to 2016. It only covers the GP Practices 
 \centering
 \includegraphics[width=\textwidth]{Figures/AsthmaPrevalenceTrendGraph}
 \decoRule
-\caption[Asthma Prevalence]{Asthma prevalence over time).}
+\caption[Asthma Prevalence]{Asthma prevalence over time.}
 \label{fig:AsthmaPrevalence}
 \end{figure}
 
@@ -91,40 +96,88 @@ A visual inspection of the graphs shows that the monitors (in red) are not unifo
 \end{figure}
 %------------------------------------------------------------------------------------------
 \section{Regression results}
-The following results were achieved by running a linear regression using the asthma prevalence as the dependant variable and NO2 concentration as the independant variable.
+The scatter plot graph at \ref{fig:Scatterplot} shows the NO2 pollution levels mapped against the asthma prevalence.
+
+
+\begin{figure}
+	\centering
+	\includegraphics[width=\textwidth]{Figures/NO2Scatterplot}
+	\decoRule
+	\caption[Scatterplot]{Scatterplot of NO2 and Asthma prevalence}
+	\label{fig:Scatterplot}
+\end{figure}
+I created new datasets for a single pollutant (NO2) and the asthma prevalence. All the rows with no pollution readings were dropped.
+
+\subsection{Linear Regression}
+
+The following results were achieved by running a linear regression using the asthma prevalence as the dependant variable and NO2 concentration as the independent variable.
+The coefficient of regression is -0.00012064 indicating a very small decline in asthma prevalence for each unit increase in pollution. The Rsqared value is -0.16412615624341975 . This indicates the linear model does not fit the data. The results for the linear regression are not good. The fact that the dependant variable is a percentage means that the linear regression model is not the best choice as it expects the dependant variable to be unbounded.
+
+\subsection{Logistic Regression}
+Therefore I ran a Logistic regression against the same data.
+I used the statsmodels Python library to create the logistic regression model. This produced the following model.
+
+\begin{verbatim}
+Logit Regression Results                           
+==============================================================================
+Dep. Variable:                      y   No. Observations:                  310
+Model:                          Logit   Df Residuals:                      309
+Method:                           MLE   Df Model:                            0
+Date:                Sun, 16 Sep 2018   Pseudo R-squ.:                     inf
+Time:                        12:04:47   Log-Likelihood:                -24.274
+converged:                       True   LL-Null:                        0.0000
+LLR p-value:                       nan
+==============================================================================
+               coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+x1            -0.0631      0.006    -10.378      0.000      -0.075      -0.051
+==============================================================================
+
+\end{verbatim}
+
+The negative coefficient indicates an inverse relationship between pollution and disease prevalence.
+The P value is low (0)indicating that pollution is a predictor for disease prevalence, albeit in a negative way.
+This is not the result that intuitively we would expect. I will discuss possible confounding factors in the conclusion.
+
+
+\subsection{Spatial Regression}
+Adding in a correction for spatial autocorrelation will tend to reduce the effect a change in the independent variable has on the dependant variable in the model. So the gradient is expected to be lower. I have used the pysal library for the regression. Unfortunately there is no Logistic Regression function available in the current version, so I have used the OLS function. This has the drawback previously discussed. In order to get the process to work I have had to run it on a subset of the rows of the complete dataset. Thus the results are only indicative. The gradient is -0.0002223 which is slightly more negative than the non-spatial regression. This can be explained by the reduction in rows.
+
+Of interest is the Morans I measurement, which is -0.423497 . This number ranges from -1 to +1 . A negative number indicates that events in the dataset are not spatially autocorrelated. This can be explained by the distribution of the monitors in the wards in London. There are fewer monitors than wards.
 
 
 \begin{verbatim}
+SUMMARY OF OUTPUT: ORDINARY LEAST SQUARES
+-----------------------------------------
+Data set            :     unknown
+Weights matrix      :     unknown
+Dependent Variable  :     dep_var                Number of Observations:          18
+Mean dependent var  :      0.0429                Number of Variables   :           2
+S.D. dependent var  :      0.0098                Degrees of Freedom    :          16
+R-squared           :      0.2010
+Adjusted R-squared  :      0.1511
 
-Results of standard Linear Regression
-Rsqared = 0.06281550170117967
-  y = column_or_1d(y, warn=True)
-Intercept = [76.10504363]
-Coefficients: 
- [[-5.4019187]]
-Results of Logistic Regression
-LogisticRegression(C=1.0, class_weight=None, dual=False, fit_intercept=True,
-          intercept_scaling=1, max_iter=100, multi_class='ovr', n_jobs=1,
-          penalty='l2', random_state=None, solver='liblinear', tol=0.0001,
-          verbose=0, warm_start=False)
-log score
-0.045454545454545456
+------------------------------------------------------------------------------------
+Variable     Coefficient       Std.Error     t-Statistic     Probability
+------------------------------------------------------------------------------------
+CONSTANT       0.0543825       0.0061210       8.8845271       0.0000001
+var_1      -0.0002223       0.0001108      -2.0061837       0.0620469
+------------------------------------------------------------------------------------
+
+DIAGNOSTICS FOR SPATIAL DEPENDENCE
+TEST                           MI/DF       VALUE           PROB
+Lagrange Multiplier (lag)         1           0.000           0.9918
+Robust LM (lag)                   1           0.117           0.7318
+Lagrange Multiplier (error)       1           1.729           0.1885
+Robust LM (error)                 1           1.846           0.1742
+Lagrange Multiplier (SARMA)       2           1.846           0.3972
+
+================================ END OF REPORT =====================================
+Morans I
+Morans I   -0.423497
+Z-Score    -1.278838
+P-Value     0.100477
+	content...
 \end{verbatim}
-
-The following scatterplot shows the regression line.
-
-\begin{figure}
-\centering
-\includegraphics[width=\textwidth]{Figures/Birkbeck-Logo-Colour}
-\decoRule
-\caption[Scatterplot]{Scatterplot and Regression Line}
-\label{fig:Scatterplot}
-\end{figure}
-
-%-----------------------------------------------------------------------------------------
-
-
-
-%----------------------------------------------------------------------------------------
 
 
